@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="application/javascript" src="jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+    <script type="application/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script>
+        var app = angular.module('app', ['ui.bootstrap']);
+        app.controller('MainController', function ($scope, $log) {
+            //
+            $scope.contract_types = ['设备制造', '工程承包', '设计合同', '增补合同', '结算协议', '其他'];
+
+            $scope.sign_dt_today = function () {
+                $scope.sign_dt = new Date();
+            };
+
+            $scope.sign_dt_open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.sign_dt_opened = true;
+            };
+
+            $scope.end_dt_today = function () {
+                $scope.end_dt = new Date();
+            };
+
+            $scope.end_dt_open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.end_dt_opened = true;
+            };
+            //start
+            $scope.start_dt_today = function () {
+                $scope.start_dt = new Date();
+                $log.log(new Date());
+            };
+
+            $scope.start_dt_open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.start_dt_opened = true;
+            };
+            //stop
+            $scope.stop_dt_today = function () {
+                $scope.stop_dt = new Date();
+            };
+
+            $scope.stop_dt_open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.stop_dt_opened = true;
+            };
+            //stay
+            $scope.stay_dt_today = function () {
+                $scope.stay_dt = new Date();
+
+            };
+
+            $scope.stay_dt_open = function ($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.stay_dt_opened = true;
+            };
+
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[1];
+
+            $scope.departments = ['冶炼分院', '轧钢分院', '自动化分院', '能源与环境分院', '建筑分院', '上海分院', '游艺设备与仿真设备中心', '贸易与服务中心', '学术与传播中心'];
+            $scope.positions = ['院长', '副院长', '项目经理', '院长助理', '副主任'];
+            $scope.natures = ['政府或政府下设投资公司', '国有及国有控股企业', '民营企业', '外企投资企业', '其他企业'];
+            $scope.statuses = ['正常经营', '亏损经营', '破产注销', '合并兼并', '其他'];
+            $scope.settings = ['入网', '未', '不入网'];
+            $scope.proj_types = ['环保', '冶金工程', '房屋建筑工程(不含保障性住房委托代建工程)', '交通基础设施', '市政公用工程', '环保工程', '商品房开发', '保障性住房—委托代建', '保障性住房—委托开发', '土地一级开发', '其他'];
+            $scope.proj_statuses = ['未完工', '已竣工结算', '已竣工未结算', '停建', '缓建', '其他'];
+            $scope.com_models = ['EPC', 'E', 'EP', 'C', 'BT', 'BOT', 'BOO', '其他'];
+            $scope.amount_months = ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'];
+            $scope.is_company = ['是', '否'];
+            $scope.is_group = ['是', '否'];
+            $scope.is_slice = ['是', '否'];
+        })
+    </script>
+</head>
+<body ng-app="app" ng-controller="MainController">
+<div class="container">
+    <!-- 标题栏-->
+    <div id="title_row" class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <h2><label>签入合同信息卡</label></h2>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="sub_title_row" class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <h4><label>合同基本信息</label></h4>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 合同编号栏-->
+    <div id="contract_no_row" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="font-size: small">合同编号</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <input type="text" ng-model="selected" placeholder="GC102-14013"
+                               typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同名称</label><br>
+                            <!--<input type="text" class="form-control" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货">-->
+                            <input type="text" ng-model="nothing" placeholder="沧州中铁公司炼铁厂转运站布袋除尘总承包工程"
+                                   typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8"
+                                   class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="contract_type" style="font-size: small">合同类型</label><br>
+                            <!--<input type="text" class="form-control" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货">-->
+                            <!--<input type="text" ng-model="nothing" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货" typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8" class="form-control">-->
+                            <select id="contract_type" class="form-control" data-placement=""
+                                    ng-init="contract_type = contract_types[0]"
+                                    ng-model="contract_type" ng-options="type for type in contract_types"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 合同详细信息-->
+    <div id="contract_detail_row" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <!--合同签订日期-->
+                <div class="col-md-3">
+                    <!--第四列-->
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">预计毛利(不含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合同毛利率</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <!--第五列-->
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">实际已签出合同金额(含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">实际已签出合同金额(不含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="sign_dt" style="font-size: small">合同签订日期</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <p class="input-group">
+                            <input id="sign_dt" type="text" class="form-control" datepicker-popup="{{format}}"
+                                   ng-model="sign_dt"
+                                   is-open="sign_dt_opened" min-date="minDate" max-date="'2015-06-22'"
+                                   ng-init="sign_dt_today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="sign_dt_open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <!--预计合同关闭日期-->
+                    <div class="form-group">
+                        <label for="end_dt" style="font-size: small">预计合同关闭日期</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <p class="input-group">
+                            <input id="end_dt" type="text" class="form-control" datepicker-popup="{{format}}"
+                                   ng-model="end_dt"
+                                   is-open="end_dt_opened" min-date="minDate" max-date="'2015-06-22'"
+                                   ng-init="end_dt_today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="end_dt_open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!--实际开工日期-->
+                    <div class="form-group">
+                        <label for="start_dt" style="font-size: small">预计合同关闭日期</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <p class="input-group">
+                            <input id="start_dt" type="text" class="form-control" datepicker-popup="{{format}}"
+                                   ng-model="start_dt"
+                                   is-open="start_dt_opened" min-date="minDate" max-date="'2015-06-22'"
+                                   ng-init="start_dt_today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="start_dt_open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <!--实际/预计竣工日期-->
+                    <div class="form-group">
+                        <label for="stop_dt" style="font-size: small">预计合同关闭日期</label><br>
+                        <p class="input-group">
+                            <input id="stop_dt" type="text" class="form-control" datepicker-popup="{{format}}"
+                                   ng-model="stop_dt"
+                                   is-open="stop_dt_opened" min-date="minDate" max-date="'2015-06-22'"
+                                   ng-init="stop_dt_today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="stop_dt_open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <!--第三列-->
+                    <!--质保期-->
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="stay_dt" style="font-size: small">质保期</label><br>
+                            <p class="input-group">
+                                <input id="stay_dt" type="text" class="form-control" datepicker-popup="{{format}}"
+                                       ng-model="stay_dt"
+                                       is-open="stay_dt_opened" min-date="minDate" max-date="'2015-06-22'"
+                                       ng-init="stay_dt_today()"
+                                       datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                       ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="stay_dt_open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 部门信息-->
+    <div id="department_row" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <!---->
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="department" style="font-size: small">责任部门</label><br>
+                            <select id="department" class="form-control" data-placement="" ng-init="department_data = departments[0]"
+                                    ng-model="department_data" ng-options="opt for opt in departments"></select>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">责任所室</label><br>
+                            <input type="text" class="form-control" placeholder="第一所">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同负责人</label><br>
+                            <input type="text" class="form-control" placeholder="张波">
+                        </div>
+                    </form>
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="position" style="font-size: small">负责人职务</label><br>
+                            <select id="position" class="form-control" data-placement="" ng-init="position_data = positions[0]"
+                                    ng-model="position_data" ng-options="opt for opt in positions"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">业主名称</label><br>
+                            <input type="text" class="form-control" placeholder="沧州中铁装备制造材料有限公司">
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="nature" style="font-size: small">业主性质</label><br>
+                                    <select id="nature" class="form-control" data-placement="" ng-init="nature_data = natures[0]"
+                                            ng-model="nature_data" ng-options="nature for nature in natures"></select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="status" style="font-size: small">业主状态</label><br>
+                                    <select id="status" class="form-control" data-placement="" ng-init="statuses_data = statuses[0]"
+                                            ng-model="statuses_data" ng-options="status for status in statuses"></select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!-- 项目信息-->
+    <div id="project_info" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-2">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="setting" style="font-size: small">立项</label><br>
+                            <select id="setting" class="form-control" data-placement="" ng-init="setting_data = settings[0]"
+                                    ng-model="setting_data" ng-options="setting for setting in settings"></select>
+                        </div>
+                    </form>
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="proj_status" style="font-size: small">项目状态</label><br>
+                            <select id="proj_status" class="form-control" data-placement="" ng-init="proj_status_data = proj_statuses[0]"
+                                    ng-model="proj_status_data" ng-options="proj_status for proj_status in proj_statuses"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <form class="form">
+                            <div class="form-group">
+                                <label for="proj_type" style="font-size: small">项目分类</label><br>
+                                <select id="proj_type" class="form-control" data-placement="" ng-init="proj_type_data = proj_types[0]"
+                                        ng-model="proj_type_data" ng-options="proj_type for proj_type in proj_types"></select>
+                            </div>
+                        </form>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="is_company" style="font-size: small">公司内部</label><br>
+                                    <select id="is_company" class="form-control" data-placement="" ng-init="is_company_data = is_company[0]"
+                                            ng-model="is_company_data" ng-options="com for com in is_company"></select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="is_group" style="font-size: small">集团内部</label><br>
+                                    <select id="is_group" class="form-control" data-placement="" ng-init="is_group_data = is_group[0]"
+                                            ng-model="is_group_data" ng-options="group for group in is_group"></select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="amount_month" style="font-size: small">收到预付款（生效）月份</label><br>
+                            <select id="amount_month" class="form-control" data-placement="" ng-init="amount_month_data = amount_months[0]"
+                                    ng-model="amount_month_data" ng-options="month for month in amount_months"></select>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="is_slice" style="font-size: small">内部切分</label><br>
+                                <select id="is_slice" class="form-control" data-placement="" ng-init="is_slice_data = is_slice[0]"
+                                        ng-model="is_slice_data" ng-options="slic for slic in is_slice"></select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <form class="form">
+                                <div class="form-group">
+                                    <label for="com_model" style="font-size: small">项目经营模式</label><br>
+                                    <select id="com_model" class="form-control" data-placement="" ng-init="com_model_data = com_models[0]"
+                                            ng-model="com_model_data" ng-options="com_model for com_model in com_models"></select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">项目所在城市</label><br>
+                            <input type="text" class="form-control" placeholder="城市名称">
+                        </div>
+                    </form>
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同关闭状态</label><br>
+                            <input type="text" class="form-control" placeholder="合同关闭状态">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <!-- 付款条件-->
+    <div class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">付款条件</label><br>
+                            <!--<input type="text" class="form-control" placeholder="备注内容">-->
+                            <textarea rows="4" class="form-control" placeholder="付款条件"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">付款形式</label><br>
+                            <!--<input type="text" class="form-control" placeholder="备注内容">-->
+                            <textarea rows="4" class="form-control" placeholder="付款形式"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">备注</label><br>
+                            <!--<input type="text" class="form-control" placeholder="备注内容">-->
+                            <textarea rows="4" class="form-control" placeholder="备注"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- -->
+</div>
+</body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="application/javascript" src="jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+    <script type="application/javascript" src="bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular/angular.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script type="application/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script>
+        var app = angular.module('app', ['ui.bootstrap']);
+        app.controller('MainController', function ($scope) {
+            //
+            $scope.selected = undefined;
+            $scope.contract_no_list = [
+                'Alabama', 'Alaska', 'Arizona', 'Arkansas', 'California', 'Colorado', 'Connecticut', 'Delaware',
+                'Florida', 'Georgia', 'Hawaii', 'Idaho', 'Illinois', 'Indiana', 'Iowa', 'Kansas', 'Kentucky',
+                'Louisiana', 'Maine', 'Maryland', 'Massachusetts', 'Michigan', 'Minnesota', 'Mississippi', 'Missouri',
+                'Montana', 'Nebraska', 'Nevada', 'New Hampshire', 'New Jersey', 'New Mexico', 'New York',
+                'North Dakota', 'North Carolina', 'Ohio', 'Oklahoma', 'Oregon', 'Pennsylvania', 'Rhode Island',
+                'South Carolina', 'South Dakota', 'Tennessee', 'Texas', 'Utah', 'Vermont', 'Virginia', 'Washington',
+                'West Virginia', 'Wisconsin', 'Wyoming'];
+            $scope.options = ['设备', '材料', '设计', '施工', '设备增补', '设计增补', '施工增补', '其他'];
+            $scope.departments = ['冶炼分院', '轧钢分院', '自动化分院', '能源与环境分院', '建筑分院', '上海分院', '游艺设备与仿真设备中心', '贸易与服务中心', '学术与传播中心'];
+            $scope.purchases = ['上网', '不上网'];
+            $scope.group_or_self = ['集采', '自采', '不上网'];
+            $scope.code_contract = ['已编制', '未编制', '不用编'];
+            $scope.purchase_styles = ['询价', '招标', '自采独家采购', '集采独家采购', '自采', '不上网'];
+            $scope.today = function() {
+                $scope.dt = new Date();
+            };
+            $scope.today();
+
+            $scope.clear = function () {
+                $scope.dt = null;
+            };
+
+            // Disable weekend selection
+            $scope.disabled = function(date, mode) {
+                return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+            };
+
+            $scope.toggleMin = function() {
+                $scope.minDate = $scope.minDate ? null : new Date();
+            };
+            $scope.toggleMin();
+
+            $scope.open = function($event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+
+                $scope.opened = true;
+            };
+
+            $scope.dateOptions = {
+                formatYear: 'yy',
+                startingDay: 1
+            };
+
+            $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+            $scope.format = $scope.formats[1];
+        })
+    </script>
+</head>
+<body ng-app="app" ng-controller="MainController">
+<div class="container">
+    <div class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <div class="form-group">
+                        <h2><label>签出合同信息卡</label></h2>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label style="font-size: medium">合同编号</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <input type="text" ng-model="selected" placeholder="GC102-14013-14C088"
+                               typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8"
+                               class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">合同名称</label><br>
+                            <!--<input type="text" class="form-control" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货">-->
+                            <input type="text" ng-model="nothing" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货"
+                                   typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8"
+                                   class="form-control">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">合同类型</label><br>
+                            <!--<input type="text" class="form-control" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货">-->
+                            <!--<input type="text" ng-model="nothing" placeholder="沧州中铁转运站除尘项目除尘器成套设备供货" typeahead="contract_no for contract_no in contract_no_list | filter:$viewValue | limitTo:8" class="form-control">-->
+                            <select class="form-control" data-placement="" ng-init="select_data = options[0]"
+                                    ng-model="select_data" ng-options="opt for opt in options"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label style="font-size: medium">签订日期</label><br>
+                        <!--<input type="text" class="form-control" placeholder="GC102-14013-14C088">-->
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt"
+                                   is-open="opened" min-date="minDate" max-date="'2015-06-22'"  ng-init="today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: medium">完成日期(实际/预计)</label><br>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt"
+                                   is-open="opened" min-date="minDate" max-date="'2015-06-22'" ng-init="today()"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="true" close-text="Close" show-button-bar="false"/>
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">合同金额(含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">合同金额(不含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">预算金额(含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">预算金额(不含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">第一次报价平均值（含税）</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">中标金额(含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">责任部门</label><br>
+                            <select class="form-control" data-placement="" ng-init="department_data = departments[0]"
+                                    ng-model="department_data" ng-options="opt for opt in departments"></select>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">责任所室</label><br>
+                            <input type="text" class="form-control" placeholder="第一所">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">负责人姓名</label><br>
+                            <input type="text" class="form-control" placeholder="朱明">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">负责人职务</label><br>
+                            <input type="text" class="form-control" placeholder="所长">
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">是否上采购平台</label><br>
+                            <select class="form-control" data-placement="" ng-init="purchase_data = purchases[0]"
+                                    ng-model="purchase_data" ng-options="opt for opt in purchases"></select>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">集采/自采</label><br>
+                            <select class="form-control" data-placement="" ng-init="group_or_self_data = group_or_self[0]"
+                                    ng-model="group_or_self_data" ng-options="opt for opt in group_or_self"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">合同单位</label><br>
+                            <input type="text" class="form-control" placeholder="北京中冶朴诚工程技术有限公司">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">采购节约额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--第四行-->
+    <div class="row">
+        <form class="form" style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">编制合同</label><br>
+                            <select class="form-control" data-placement="" ng-init="code_contract_data = code_contract[0]"
+                                    ng-model="code_contract_data" ng-options="opt for opt in code_contract"></select>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">采购方式</label><br>
+                            <select class="form-control" data-placement="" ng-init="purchase_styles_data = purchase_styles[0]"
+                                    ng-model="purchase_styles_data" ng-options="opt for opt in purchase_styles"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">合同结算(含待结算)金额(含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: medium">合同结算(含待结算)金额(不含税)</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: medium">备注</label><br>
+                            <!--<input type="text" class="form-control" placeholder="备注内容">-->
+                            <textarea rows="4" class="form-control" placeholder="备注内容"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

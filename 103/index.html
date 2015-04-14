@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng:app="example">
+
+<head>
+    <script src="angular.js"></script>
+    <script src="angular-route.js"></script>
+    <script src="angular-animate.js"></script>
+    <script data-require="prefixfree@*" data-semver="1.0.7" src="//cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+    <script src="angular-flash.js"></script>
+    <script src="script.js"></script>
+
+    <link data-require="meyer-reset@*" data-semver="0.2.0" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="flash-messages.css" />
+</head>
+
+<body>
+<header>
+    <nav>
+        <ol>
+            <li><a href="#/">Home</a></li>
+            <li><a href="#/some">Some</a></li>
+            <li><a href="#/other">Other</a></li>
+            <li><a href="#/page">Page</a></li>
+        </ol>
+    </nav>
+    <flash:messages class="slide-down" ng:show="messages"></flash:messages>
+</header>
+<main ng:view=""></main>
+<footer><code>bower install angular-flash-messages</code></footer>
+</body>
+
+</html>

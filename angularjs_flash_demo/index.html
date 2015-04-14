@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html> <!--<![endif]-->
+<head>
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="bower_components/bootstrap/docs/assets/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body ng-app="App">
+
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.min.js"></script>
+<![endif]-->
+
+<div class="container">
+
+    <div class="row row-alert">
+        <div class="span12">
+            <div flash-alert active-class="in" class="alert-flash fade" duration="0">
+                <button type="button" class="close" ng-click="hide()">&times;</button>
+                <strong class="alert-heading">{{flash.type}}</strong>
+                <span class="alert-message">{{flash.message}}</span>
+
+                <p>This alert:</p>
+                <ul>
+                    <li>Shows all alerts</li>
+                    <li>Does not fade away</li>
+                    <li>Has a close button</li>
+                    <li>Works outside of controller scope</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-view></div>
+
+    <div class="row row-alert">
+        <div class="span12">
+            <div id="alert-1" flash-alert active-class="in" class="alert-flash fade" duration="0">
+                <button type="button" class="close" ng-click="hide()">&times;</button>
+                <i class="icon-ok-sign"></i>
+                <strong class="alert-heading">{{flash.type}}</strong>
+                <span class="alert-message">{{flash.message}}</span>
+                <h4 class="pull-right">Alert #1</h4>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="angular-flash.js"></script>
+<script src="scripts/controllers/main-ctrl.js"></script>
+<script src="scripts/app.js"></script>
+</body>
+</html>

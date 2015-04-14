@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Resource Service</title>
+    <script src="angular.min.js"></script>
+    <script src="angular-route.min.js"></script>
+    <script src="angular-resource.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-app="myApp">
+<div ng-controller="UsersController">
+    <p ng-repeat="user in users">{{user.username}}</p>
+</div>
+
+</body>
+</html>

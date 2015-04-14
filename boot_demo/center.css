@@ -1,0 +1,44 @@
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.col-fixed {
+    /* custom width */
+    width:320px;
+}
+.col-min {
+    /* custom min width */
+    min-width:320px;
+}
+.col-max {
+    /* custom max width */
+    max-width:320px;
+}
+
+.browse .container, .blind_dating .container { padding-bottom: 0; }
+.animation_container { position: relative; }
+.browse .animation_container { height: 430px; }
+.animation_img { position: absolute; bottom: 0; }
+.animation_img1 { right: 25%; }
+.animation_img2 { right: 25%; }
+
+
+/* New classes */
+.browse .textContainer {
+    height: 430px;
+    line-height: 400px;
+}
+
+.textContainer h2 {
+    vertical-align: middle;
+    display: inline-block;
+}

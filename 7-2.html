@@ -1,0 +1,29 @@
+<!DOCTYPE html >
+<html ng-app="myapp">
+<head>
+    <title>Angular Services</title>
+    <script src="angular.min.js"></script>
+    <script>
+        var module = angular.module('myapp', []);
+        module.controller("MyController", function ($scope, $location) {
+            $scope.url = $location.absUrl();
+            $scope.protocol = $location.protocol();
+            $scope.host = $location.host();
+            $scope.port = $location.port();
+        });
+    </script>
+<body ng-controller="MyController">
+<p>The URL is: {{url}}</p>
+<ul>
+    <li>{{protocol}}</li>
+    <li>{{host}}</li>
+    <li>{{port}}</li>
+</ul>
+<div ng-controller="My01Controller">
+
+</div>
+<div ng-controller="My02Controller">
+
+</div>
+</body>
+</html>

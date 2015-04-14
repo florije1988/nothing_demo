@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="application/javascript" src="jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="grid_demo.css">
+</head>
+<body>
+<!--container宽度固定为960px，浏览器居中显示 container_12指默认有12列-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-3"> //The one i added
+            <div class="input-group input-group-lg">
+                <div class="input-group-btn text-left">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">option 1<span
+                            class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">option 1</a></li>
+                        <li><a href="#">option 2</a></li>
+                        <li><a href="#">option 3</a></li>
+                    </ul>
+                </div>
+                <!-- /btn-group -->
+                <input type="text" class="form-control">
+            </div>
+            <!-- /input-group -->
+        </div>
+        <div class="col-md-2 text-left">
+            <button type="button" class="btn btn-default btn-lg"> Search <span
+                    class="glyphicon glyphicon-search"></span></button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

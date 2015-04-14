@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="MyApp">
+<head>
+    <script src="angular.min.js"></script>
+    <script src="main.js"></script>
+    <!--<script>-->
+    <!--function MyFirstCtrl($scope) {-->
+    <!--var employees = ['Catherine Grant', 'Monica Grant',-->
+    <!--'Christopher Grant', 'Jennifer Grant'-->
+    <!--];-->
+    <!--$scope.ourEmployees = employees;-->
+    <!--}-->
+    <!--</script>-->
+</head>
+<body ng-controller='MyFirstCtrl'>
+<h2>Number of Employees: {{ ourEmployees.length}}</h2>
+
+<p ng-repeat="employee in ourEmployees">{{employee}}</p>
+<label>City: </label><input ng-model="city" type="text"/></label>
+<p>You entered: {{city}}</p>
+You entered: <span ng-bind="city"></span>
+
+<p ng-show="true">Paragraph 1, can you see me?</p>
+
+<p ng-show="false">Paragraph 2, can you see me?</p>
+
+<p ng-show="1 == 1">Paragraph 3, can you see me?</p>
+
+<p ng-show="1 == 2">Paragraph 4, can you see me?</p>
+
+<button ng-click="count = count + 1" ng-init="count = 0">
+    Increment
+</button>
+count: {{count}}
+
+<h1>Expression Samples</h1>
+<!-- Basic arithmetic -->
+<p>6 + 4 = {{6 + 4}}</p>
+<!-- Using a JavaScript string method -->
+<p>{{"Beginning AngularJS".toUpperCase()}}</p>
+<!-- Searching for an occurence of 'D' -->
+<p>{{"ABCDEFG".indexOf('D')}}</p>
+<!-- Ternary operation -->
+<p>{{1==1 ? "Red" : "Blue"}}</p>
+
+<div ng-controller="MyFilterDemoCtrl">
+    <p>
+        <!-- Unfiltered data -->
+        <strong>First Name</strong>: {{data.firstName}}<br/>
+        <strong>Surname:</strong> {{data.surname}}
+    </p>
+
+    <p>
+        Consumption: {{data.consumption }}<br/>
+        Consumption: {{data.consumption | number }}
+    </p>
+
+    <p>medium:<strong> {{ data.dateJoined | date:'medium'}} </strong></p>
+
+    <p>mediumDate:<strong> {{ data.dateJoined | date:'mediumDate'}} </strong></p>
+
+    <p>shortDate:<strong> {{ data.dateJoined | date:'shortDate'}} </strong></p>
+
+    <p>This customer joined in the month of {{ data.dateJoined | date:'MMMM'}} on a {{
+        data.dateJoined | date:'EEEE'}} at {{ data.dateJoined | date:'ha'}}</p>
+
+    <p>
+        <!-- Filtered data -->
+        <strong>First Name</strong>: {{data.firstName | lowercase}}<br/>
+        <strong>Surname:</strong> {{data.surname | lowercase }}
+    </p>
+
+    <ul>
+        <li ng-repeat="gigabytes in data.monthlyUsageHistory | limitTo:5">
+            {{ gigabytes | number:2}}
+        </li>
+    </ul>
+</div>
+</body>
+</html>

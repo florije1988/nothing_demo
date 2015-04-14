@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="application/javascript" src="jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4" style="background-color: darkred">
+            <div class="row" style="display: table-cell;float:none;">
+                <div class="col-md-4 text-center" style="vertical-align: middle">
+                    <p class="text-center" style="text-align: center; vertical-align: middle">合同编号</p>
+                </div>
+                <div class="col-md-8" style="background-color: red">
+                    <input type="text" id="signoutcontractid" class="form-control input-sm"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4" style="text-align: center;">
+                    <label>合同名称</label>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" id="contractname" class="form-control input-sm"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-4" style="text-align: center;">
+                    <label>类型Ea</label>
+                </div>
+                <div class="col-md-6">
+                    <select id="sign_out_contract_type" class="menuselection" style="height: 30px; width:100%;">
+                        <option class="menuselection" selected></option>
+                        <option class="menuselection" ng-repeat="x in all_sign_out_contract_type">{{ x }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-5 col-md-3 col-lg-1 vcenter">
+        <div style="height:10em;border:1px solid #000">Big</div>
+    </div>
+    <div class="col-xs-5 col-md-7 col-lg-9 vcenter">
+    <div style="height:3em;border:1px solid #F00">Small</div>
+</div>
+</div>
+</body>
+</html>
