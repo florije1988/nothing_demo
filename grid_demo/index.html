@@ -3,16 +3,18 @@
 <head>
     <script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.js"></script>
     <script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-touch.js"></script>
-    <script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script>
-    <script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>
-    <script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>
-    <script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>
+    <!--<script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-animate.js"></script>-->
+    <!--<script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/csv.js"></script>-->
+    <!--<script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/pdfmake.js"></script>-->
+    <!--<script type="application/javascript" src="http://ui-grid.info/docs/grunt-scripts/vfs_fonts.js"></script>-->
     <script type="application/javascript" src="http://ui-grid.info/release/ui-grid-unstable.js"></script>
     <link type="text/css" rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap-theme.css">
     <script src="app.js"></script>
 </head>
 <body>
 <div ng-controller="MainCtrl">
+    <div class="row"></div>
     <div ui-grid="{ data: myData }" style="width: 500px;height: 250px;"></div>
 </div>
 </body>
