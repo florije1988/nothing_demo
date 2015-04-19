@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular-resource.min.js"></script>
+
+    <script src="//ui-grid.info/release/ui-grid-unstable.min.js"></script>
+    <script src="myapp.js"></script>
+    <link rel="stylesheet" href="http://ui-grid.info/release/ui-grid-unstable.css" type="text/css">
+    <meta charset="utf-8">
+    <title>AngularJS data grid Example</title>
+</head>
+<body ng-controller="MyController">
+<h3>'ui.grid' module Example</h3>
+
+<div ui-grid="{ data: myData }" class="grid"></div>
+</body>
+</html>
