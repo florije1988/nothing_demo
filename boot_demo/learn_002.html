@@ -93,6 +93,7 @@
             $scope.is_company = ['是', '否'];
             $scope.is_group = ['是', '否'];
             $scope.is_slice = ['是', '否'];
+            $scope.taxs_items = ['0.06', '0.17', '0.341']
         })
     </script>
 </head>
@@ -697,6 +698,491 @@
                             <label style="font-size: small">备注</label><br>
                             <!--<input type="text" class="form-control" placeholder="备注内容">-->
                             <textarea rows="4" class="form-control" placeholder="付款条件"></textarea>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">总额</label><br>
+                            <label style="font-size: small">/</label><br>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="e_item" style="font-size: small">E</label><br>
+                            <select id="e_item" class="form-control" data-placement="" ng-init="e_item_data = taxs_items[0]"
+                                    ng-model="e_item_data" ng-options="e_item for e_item in taxs_items"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="p_item" style="font-size: small">P</label><br>
+                            <select id="p_item" class="form-control" data-placement="" ng-init="p_item_data = taxs_items[1]"
+                                    ng-model="p_item_data" ng-options="p_item for p_item in taxs_items"></select>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label for="c_item" style="font-size: small">C</label><br>
+                            <select id="c_item" class="form-control" data-placement="" ng-init="c_item_data = taxs_items[2]"
+                                    ng-model="c_item_data" ng-options="c_item for c_item in taxs_items"></select>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- -->
+    <div id="amount_row_1" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/不含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/不含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/不含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合同金额/不含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="amount_row_2" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/不含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/不含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/不含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">预计签出合同额/不含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="form">
+                        <div class="form-group text-center">
+                            <label style="font-size: medium;">合同结算(含待结算)金额</label><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="amount_row_3" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合计/含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合计/不含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合计/含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合计/不含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合计/含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合计/不含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">合计/含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">合计/不含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="amount_row_4" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/不含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/不含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/不含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中已经签订结算金额/不含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="amount_row_5" class="row">
+        <form style="border: 1px solid #D6D6D6;padding: 5px;">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/不含税/总额</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/不含税/E</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/不含税/P</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-3">
+                    <form class="form">
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: small">其中待签订结算金额/不含税/C</label><br>
+                            <div class="input-group">
+                                <span class="input-group-addon">￥</span>
+                                <input type="text" class="form-control" placeholder="100.00">
+                                <span class="input-group-addon">W(万)</span>
+                            </div>
                         </div>
                     </form>
                 </div>
